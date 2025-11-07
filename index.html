@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Git Commands — Quick Reference</title>
+    <style>
+        :root{
+            --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#7dd3fc;
+            --glass: rgba(255,255,255,0.02);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color:#e6eef6;
+        }
+        html,body{height:100%;margin:0;background:linear-gradient(180deg,#071026 0%, #071120 60%), var(--bg);-webkit-font-smoothing:antialiased;}
+        .wrap{max-width:1000px;margin:36px auto;padding:28px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);box-shadow:0 6px 30px rgba(2,6,23,0.7);}
+        header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;}
+        h1{font-size:20px;margin:0}
+        p.lead{margin:0;color:var(--muted);font-size:13px}
+        .controls{display:flex;gap:8px;align-items:center}
+        input[type="search"]{background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:var(--accent);padding:8px 12px;border-radius:8px;outline:none;width:260px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:18px}
+        .card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);}
+        .cmd{display:flex;align-items:center;gap:10px}
+        .badge{background:rgba(125,211,252,0.08);color:var(--accent);padding:6px 8px;border-radius:6px;font-weight:600;font-family:monospace}
+        .desc{color:var(--muted);font-size:13px;margin:8px 0}
+        pre{background:#041122;color:#cfeefe;padding:10px;border-radius:6px;overflow:auto;margin:0;font-size:13px}
+        .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--muted)}
+        .kbd{background:rgba(255,255,255,0.03);padding:4px 6px;border-radius:6px;font-family:monospace}
+        footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+        @media (max-width:460px){input[type="search"]{width:140px}}
+    </style>
+</head>
+<body>
+    <main class="wrap" role="main">
+        <header>
+            <div>
+                <h1>Git Commands — Quick HTML Reference</h1>
+                <p class="lead">Common Git commands with short explanations and examples. Use the search box to filter.</p>
+            </div>
+            <div class="controls">
+                <input id="filter" type="search" placeholder="Search commands (e.g. commit, branch)" aria-label="Search commands" />
+            </div>
+        </header>
+
+        <section class="grid" id="cards">
+            <!-- Each card: command, description, example, note -->
+            <article class="card" data-keywords="init repository start create">
+                <div class="cmd"><span class="badge">git init</span></div>
+                <p class="desc">Create a new local Git repository in the current directory.</p>
+                <pre>git init
+# then add files and commit</pre>
+                <div class="meta"><span class="kbd">Creates .git/</span></div>
+            </article>
+
+            <article class="card" data-keywords="clone copy mirror remote repository">
+                <div class="cmd"><span class="badge">git clone</span></div>
+                <p class="desc">Create a local copy of a remote repository.</p>
+                <pre>git clone https://github.com/user/repo.git
+# clones into ./repo</pre>
+                <div class="meta"><span class="kbd">Copies history & branches</span></div>
+            </article>
+
+            <article class="card" data-keywords="status staged unstaged changes">
+                <div class="cmd"><span class="badge">git status</span></div>
+                <p class="desc">Show the working tree status: staged, unstaged, untracked files.</p>
+                <pre>git status --short
+# shows short summary</pre>
+                <div class="meta"><span class="kbd">Use before commit</span></div>
+            </article>
+
+            <article class="card" data-keywords="add stage index files">
+                <div class="cmd"><span class="badge">git add</span></div>
+                <p class="desc">Stage file changes to be included in the next commit.</p>
+                <pre>git add file.txt
+git add .     # stage all changes</pre>
+                <div class="meta"><span class="kbd">Stages to index</span></div>
+            </article>
+
+            <article class="card" data-keywords="commit snapshot message">
+                <div class="cmd"><span class="badge">git commit</span></div>
+                <p class="desc">Record staged changes in the repository history with a message.</p>
+                <pre>git commit -m "Add feature X"
+git commit --amend    # modify last commit</pre>
+                <div class="meta"><span class="kbd">Atomic snapshot</span></div>
+            </article>
+
+            <article class="card" data-keywords="push upload origin remote">
+                <div class="cmd"><span class="badge">git push</span></div>
+                <p class="desc">Upload local commits to a remote repository (e.g., origin).</p>
+                <pre>git push origin main
+git push --set-upstream origin feature</pre>
+                <div class="meta"><span class="kbd">Requires remote & permission</span></div>
+            </article>
+
+            <article class="card" data-keywords="pull fetch merge update remote">
+                <div class="cmd"><span class="badge">git pull</span></div>
+                <p class="desc">Fetch from remote and merge into current branch (fetch + merge).</p>
+                <pre>git pull origin main
+# or use git pull --rebase to rebase instead of merge</pre>
+                <div class="meta"><span class="kbd">Convenience command</span></div>
+            </article>
+
+            <article class="card" data-keywords="fetch download remote objects">
+                <div class="cmd"><span class="badge">git fetch</span></div>
+                <p class="desc">Download objects and refs from remote, without merging them into your branch.</p>
+                <pre>git fetch origin
+git branch -r    # see remote branches</pre>
+                <div class="meta"><span class="kbd">Safe update</span></div>
+            </article>
+
+            <article class="card" data-keywords="branch branches list create delete">
+                <div class="cmd"><span class="badge">git branch</span></div>
+                <p class="desc">List, create, or delete branches.</p>
+                <pre>git branch            # list local
+git branch feature     # create branch
+git branch -d feature  # delete</pre>
+                <div class="meta"><span class="kbd">Use with git checkout / switch</span></div>
+            </article>
+
+            <article class="card" data-keywords="checkout switch change branch files">
+                <div class="cmd"><span class="badge">git checkout</span></div>
+                <p class="desc">Switch branches or restore working tree files (older command). Use git switch for branch changes.</p>
+                <pre>git checkout main
+git checkout -b feature   # create & switch</pre>
+                <div class="meta"><span class="kbd">Legacy; prefer git switch</span></div>
+            </article>
+
+            <article class="card" data-keywords="switch newer alternative checkout">
+                <div class="cmd"><span class="badge">git switch</span></div>
+                <p class="desc">Modern command to switch branches or create and switch in one step.</p>
+                <pre>git switch feature
+git switch -c feature</pre>
+                <div class="meta"><span class="kbd">Simpler branch switching</span></div>
+            </article>
+
+            <article class="card" data-keywords="merge combine branches">
+                <div class="cmd"><span class="badge">git merge</span></div>
+                <p class="desc">Merge another branch into the current branch, creating a merge commit (unless fast-forward).</p>
+                <pre>git checkout main
+git merge feature</pre>
+                <div class="meta"><span class="kbd">May produce conflicts</span></div>
+            </article>
+
+            <article class="card" data-keywords="rebase rewrite linearize history">
+                <div class="cmd"><span class="badge">git rebase</span></div>
+                <p class="desc">Reapply commits on top of another base tip; rewrites history (use carefully on shared branches).</p>
+                <pre>git rebase main
+git rebase --continue</pre>
+                <div class="meta"><span class="kbd">History rewriting</span></div>
+            </article>
+
+            <article class="card" data-keywords="log history view commits">
+                <div class="cmd"><span class="badge">git log</span></div>
+                <p class="desc">Show commit history with details; supports many formatting options.</p>
+                <pre>git log --oneline --graph --decorate --all
+git log -p file.txt</pre>
+                <div class="meta"><span class="kbd">Use --oneline for compact view</span></div>
+            </article>
+
+            <article class="card" data-keywords="diff changes compare worktree index commit">
+                <div class="cmd"><span class="badge">git diff</span></div>
+                <p class="desc">Show changes between commits, branches, or working tree and index.</p>
+                <pre>git diff             # unstaged changes
+git diff --staged     # staged vs HEAD
+git diff main..feature</pre>
+                <div class="meta"><span class="kbd">Visualize changes</span></div>
+            </article>
+
+            <article class="card" data-keywords="reset unstage move HEAD revert index">
+                <div class="cmd"><span class="badge">git reset</span></div>
+                <p class="desc">Reset current HEAD to a specified state. Modes: --soft, --mixed, --hard (use with care).</p>
+                <pre>git reset --soft HEAD~1   # keep changes staged
+git reset --hard HEAD~1     # discard</pre>
+                <div class="meta"><span class="kbd">Dangerous with --hard</span></div>
+            </article>
+
+            <article class="card" data-keywords="rm remove delete files index">
+                <div class="cmd"><span class="badge">git rm</span></div>
+                <p class="desc">Remove files from the working tree and the index (stages deletion).</p>
+                <pre>git rm file.txt
+git rm --cached file.txt   # stop tracking, keep file</pre>
+                <div class="meta"><span class="kbd">Stages deletion</span></div>
+            </article>
+
+            <article class="card" data-keywords="stash save pop temporary changes">
+                <div class="cmd"><span class="badge">git stash</span></div>
+                <p class="desc">Temporarily save changes that are not ready to be committed and clean the working directory.</p>
+                <pre>git stash push -m "WIP"
+git stash list
+git stash pop</pre>
+                <div class="meta"><span class="kbd">Useful for context switching</span></div>
+            </article>
+
+            <article class="card" data-keywords="remote manage remotes add remove">
+                <div class="cmd"><span class="badge">git remote</span></div>
+                <p class="desc">Manage set of tracked repositories (remotes).</p>
+                <pre>git remote -v
+git remote add origin https://...git</pre>
+                <div class="meta"><span class="kbd">List & manage remotes</span></div>
+            </article>
+
+            <article class="card" data-keywords="tag annotate mark releases">
+                <div class="cmd"><span class="badge">git tag</span></div>
+                <p class="desc">Create, list, or delete tags to mark specific commits (lightweight or annotated).</p>
+                <pre>git tag v1.0.0
+git tag -a v1.0.0 -m "Release 1.0"</pre>
+                <div class="meta"><span class="kbd">Useful for releases</span></div>
+            </article>
+
+            <article class="card" data-keywords="revert undo create new commit">
+                <div class="cmd"><span class="badge">git revert</span></div>
+                <p class="desc">Create a new commit that undoes the changes introduced by an earlier commit (safe for public branches).</p>
+                <pre>git revert abc1234</pre>
+                <div class="meta"><span class="kbd">Non-destructive undo</span></div>
+            </article>
+
+            <article class="card" data-keywords="show inspect object commit details">
+                <div class="cmd"><span class="badge">git show</span></div>
+                <p class="desc">Display information about objects (commits, tags, blobs). Useful to inspect a commit.</p>
+                <pre>git show HEAD
+git show abc1234</pre>
+                <div class="meta"><span class="kbd">Inspect commit content</span></div>
+            </article>
+
+            <article class="card" data-keywords="blame annotate line history">
+                <div class="cmd"><span class="badge">git blame</span></div>
+                <p class="desc">Show which revision and author last modified each line of a file.</p>
+                <pre>git blame file.txt</pre>
+                <div class="meta"><span class="kbd">Line-level history</span></div>
+            </article>
+        </section>
+
+        <footer>
+            Tip: run git --help or git <command> --help for detailed docs. This page is a compact cheat-sheet.
+        </footer>
+    </main>
+
+    <script>
+        (function(){
+            const input = document.getElementById('filter');
+            const cards = Array.from(document.querySelectorAll('.card'));
+            function normalize(s){ return (s||'').toLowerCase(); }
+            input.addEventListener('input', () => {
+                const q = normalize(input.value.trim());
+                if(!q){
+                    cards.forEach(c=>c.style.display='');
+                    return;
+                }
+                cards.forEach(card => {
+                    const text = normalize(card.textContent + ' ' + (card.dataset.keywords||''));
+                    card.style.display = text.includes(q) ? '' : 'none';
+                });
+            });
+            // quick keyboard focus: press / to focus search
+            window.addEventListener('keydown', (e) => {
+                if(e.key === '/' && document.activeElement !== input){
+                    e.preventDefault(); input.focus(); input.select();
+                }
+            });
+        })();
+    </script>
+</body>
+</html></article></div>
