@@ -1,0 +1,35 @@
+// name use can local also instead of global
+
+git config --global user.name "name" 
+
+git config --global user.email "my@gmail.com" // sets the email
+
+git config --list // show the config settings
+
+git --version // to know the version of git
+
+git clone https://github.com/name/Bank_Managment_System.git 
+// to copy the code to a local machine from repo in GitHub.
+
+cd => change directory .
+clear => to clear the terminal.
+ls => to show the list of files in current dir
+ls -a => to even include hidden files
+
+git status 
+// its shows the status(compares) of the cloned repo locally and the one present in GitHub.
+// git status --short for shorter version of status.
+
+AFTER MODIFING A FILE STEPS 
+->GIT ADD & GIT COMMIT
+
+
+types of changes:
+	untracked files - the files newly created or which git has no idea.(files not present at the time of clone).
+	modified - the files in which changes are made.
+	unmodified - the files which are not changed.
+	staged - if the untracked/modified changed added to git add then those are staged.
+
+git add index.html
+// Basically there is 2 step verification process for any change to get to the repo first one is this by doing this you are clearing 1st verification.
+// git add . makes all the current changes to be added. 
